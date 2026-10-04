@@ -1,0 +1,1732 @@
+{
+  "timestamp": "2026-10-03T19:41:32.154Z",
+  "mode": "HTTP integration / isolated SQLite",
+  "readyApiGui": "Not run",
+  "commit": "a0648e3",
+  "baseUrl": "http://127.0.0.1:53147/api",
+  "slaMs": 2000,
+  "summary": {
+    "total": 33,
+    "pass": 32,
+    "fail": 1,
+    "blocked": 0
+  },
+  "cases": [
+    {
+      "id": "TC-AUTH-01",
+      "suite": "Authentication",
+      "title": "Đăng nhập admin với credential seed",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 140,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 200,
+          "status": 200,
+          "ms": 139
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-02",
+      "suite": "Authentication",
+      "title": "Email không tồn tại",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 119,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 119
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-03",
+      "suite": "Authentication",
+      "title": "Sai password một lần, còn 4 lần thử",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1035,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 130
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 122
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 122
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 173
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 122
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/11",
+          "expected": null,
+          "status": 200,
+          "ms": 126
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 117
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 123
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-04",
+      "suite": "Authentication",
+      "title": "Khóa sau 5 lần sai; lần 6 trả 423",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1721,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 132
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 120
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 123
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 165
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 121
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 121
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 123
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 118
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 401,
+          "status": 401,
+          "ms": 124
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 423,
+          "status": 423,
+          "ms": 112
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/12",
+          "expected": null,
+          "status": 200,
+          "ms": 161
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 152
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 147
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-05",
+      "suite": "Authentication",
+      "title": "Login thiếu email",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 133,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 422,
+          "status": 422,
+          "ms": 133
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-06",
+      "suite": "Authentication",
+      "title": "Đăng ký mensuel/card, tạo client và kỳ đầu đã thanh toán",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1243,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/register",
+          "expected": 201,
+          "status": 201,
+          "ms": 171
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 160
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "expected": 200,
+          "status": 200,
+          "ms": 148
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/client/paiements",
+          "expected": 200,
+          "status": 200,
+          "ms": 147
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 160
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/13",
+          "expected": null,
+          "status": 200,
+          "ms": 160
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 155
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 401,
+          "ms": 142
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-07",
+      "suite": "Authentication",
+      "title": "Register plan không hợp lệ",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 143,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/register",
+          "expected": 422,
+          "status": 422,
+          "ms": 143
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-08",
+      "suite": "Authentication",
+      "title": "Lấy profile client với token hợp lệ",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 462,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 162
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "expected": 200,
+          "status": 200,
+          "ms": 152
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 149
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-AUTH-09",
+      "suite": "Authentication",
+      "title": "Logout và chứng minh token bị thu hồi",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 595,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 200,
+          "status": 200,
+          "ms": 157
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/logout",
+          "expected": 200,
+          "status": 200,
+          "ms": 162
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "expected": 401,
+          "status": 401,
+          "ms": 137
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 401,
+          "ms": 138
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-01",
+      "suite": "Admin - Client",
+      "title": "Danh sách client phân trang 10",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 476,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 164
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "expected": 200,
+          "status": 200,
+          "ms": 168
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 144
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-02",
+      "suite": "Admin - Client",
+      "title": "Search tìm đúng client QA theo email",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1447,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 154
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 151
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 155
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 254
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients?search=qa-3a08d9bd-b28c-4449-96f3-4f685b663c5b@test.local",
+          "expected": 200,
+          "status": 200,
+          "ms": 171
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/14",
+          "expected": null,
+          "status": 200,
+          "ms": 200
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 152
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 208
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-03",
+      "suite": "Admin - Client",
+      "title": "Tạo client và xác minh lưu dữ liệu",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1431,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 170
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 157
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 209
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": 201,
+          "status": 201,
+          "ms": 206
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/15",
+          "expected": 200,
+          "status": 200,
+          "ms": 171
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/15",
+          "expected": null,
+          "status": 200,
+          "ms": 207
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 156
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 154
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-04",
+      "suite": "Admin - Client",
+      "title": "Tạo client với coach không tồn tại",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 527,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 168
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": 422,
+          "status": 422,
+          "ms": 202
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 157
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-05",
+      "suite": "Admin - Client",
+      "title": "Update statut suspendu và đọc lại",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1554,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 158
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 150
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 159
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 255
+        },
+        {
+          "phase": "test",
+          "method": "PUT",
+          "path": "/admin/clients/16",
+          "expected": 200,
+          "status": 200,
+          "ms": 169
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/16",
+          "expected": 200,
+          "status": 200,
+          "ms": 155
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/16",
+          "expected": null,
+          "status": 200,
+          "ms": 154
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 156
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 197
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-CLIENT-06",
+      "suite": "Admin - Client",
+      "title": "Soft-delete client và user; endpoint/token không dùng được",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 2541,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 172
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 151
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 157
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 206
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 200,
+          "status": 200,
+          "ms": 160
+        },
+        {
+          "phase": "test",
+          "method": "DELETE",
+          "path": "/admin/clients/17",
+          "expected": 200,
+          "status": 200,
+          "ms": 154
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/17",
+          "expected": 404,
+          "status": 404,
+          "ms": 174
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "expected": 401,
+          "status": 401,
+          "ms": 216
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/17",
+          "expected": null,
+          "status": 404,
+          "ms": 243
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 241
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 469
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 401,
+          "ms": 196
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-COACH-01",
+      "suite": "Admin - Coach",
+      "title": "List coach có code và clients_count",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 590,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 213
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/coaches",
+          "expected": 200,
+          "status": 200,
+          "ms": 197
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 180
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-COACH-02",
+      "suite": "Admin - Coach",
+      "title": "Tạo coach tự sinh COACH-NNN",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 771,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 187
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/coaches",
+          "expected": 201,
+          "status": 201,
+          "ms": 213
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/coaches/4",
+          "expected": null,
+          "status": 200,
+          "ms": 185
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 186
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-COACH-03",
+      "suite": "Admin - Coach",
+      "title": "Email coach trùng bị từ chối",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 640,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 206
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/coaches",
+          "expected": 422,
+          "status": 422,
+          "ms": 215
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 220
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ADMIN-COACH-04",
+      "suite": "Admin - Coach",
+      "title": "Không xóa coach còn client",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1743,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 230
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 220
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 219
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 238
+        },
+        {
+          "phase": "test",
+          "method": "DELETE",
+          "path": "/admin/coaches/1",
+          "expected": 422,
+          "status": 422,
+          "ms": 188
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/18",
+          "expected": null,
+          "status": 200,
+          "ms": 204
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 230
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 213
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-PAIEMENT-01",
+      "suite": "Payment",
+      "title": "Lọc kỳ hạn en_attente đã quá hạn",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 580,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 203
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/paiements?statut=retard",
+          "expected": 200,
+          "status": 200,
+          "ms": 194
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 182
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-PAIEMENT-02",
+      "suite": "Payment",
+      "title": "Tạo payment và cập nhật echeance thành paye",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 2001,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 219
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 206
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 190
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 214
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/admin/clients/19",
+          "expected": null,
+          "status": 200,
+          "ms": 190
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/paiements",
+          "expected": 201,
+          "status": 201,
+          "ms": 221
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/19",
+          "expected": 200,
+          "status": 200,
+          "ms": 241
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/19",
+          "expected": null,
+          "status": 200,
+          "ms": 178
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 177
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 164
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-PAIEMENT-03",
+      "suite": "Payment",
+      "title": "Từ chối payment lần 2 cùng kỳ hạn",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 2070,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 180
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 189
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 209
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 266
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/admin/clients/20",
+          "expected": null,
+          "status": 200,
+          "ms": 207
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/paiements",
+          "expected": null,
+          "status": 201,
+          "ms": 223
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/admin/paiements",
+          "expected": 422,
+          "status": 422,
+          "ms": 212
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/20",
+          "expected": null,
+          "status": 200,
+          "ms": 206
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 193
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 185
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-PAIEMENT-04",
+      "suite": "Payment",
+      "title": "Stats có 4 field và số tiền không âm",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 602,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 197
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "expected": 200,
+          "status": 200,
+          "ms": 201
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 203
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-COACH-01",
+      "suite": "Coach - Planning",
+      "title": "Coach xem planning tháng/năm hiện tại",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 809,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 199
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 191
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/coach/planning?mois=10&annee=2026",
+          "expected": 200,
+          "status": 200,
+          "ms": 203
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 215
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-COACH-02",
+      "suite": "Coach - Planning",
+      "title": "Tạo session cho client coach khác bị 404",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 2380,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 206
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 202
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 210
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 205
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 200
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 255
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/coach/planning/seances",
+          "expected": 404,
+          "status": 404,
+          "ms": 210
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/21",
+          "expected": null,
+          "status": 200,
+          "ms": 227
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 206
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 223
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 237
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-COACH-03",
+      "suite": "Coach - Planning",
+      "title": "Giờ kết thúc trước giờ bắt đầu bị 422",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 1895,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 251
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "GET",
+          "path": "/me",
+          "expected": null,
+          "status": 200,
+          "ms": 213
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 236
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "expected": null,
+          "status": 201,
+          "ms": 345
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/coach/planning/seances",
+          "expected": 422,
+          "status": 422,
+          "ms": 232
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/22",
+          "expected": null,
+          "status": 200,
+          "ms": 212
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 204
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 203
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-CLIENT-01",
+      "suite": "Client",
+      "title": "Client dashboard của chính account",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 626,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 213
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/client/dashboard",
+          "expected": 200,
+          "status": 200,
+          "ms": 201
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 211
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-CLIENT-02",
+      "suite": "Client",
+      "title": "Client payments trả object kỳ hạn và tổng tiền",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 538,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 217
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/client/paiements",
+          "expected": 200,
+          "status": 200,
+          "ms": 161
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 160
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ROLE-01",
+      "suite": "Role",
+      "title": "Client gọi admin bị 403",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 554,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 210
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "expected": 403,
+          "status": 403,
+          "ms": 162
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 182
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ROLE-02",
+      "suite": "Role",
+      "title": "Không token gọi admin bị 401",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 150,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "expected": 401,
+          "status": 401,
+          "ms": 150
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-ROLE-03",
+      "suite": "Role",
+      "title": "Admin được middleware cho phép xem coach dashboard",
+      "result": "Fail",
+      "knownDefect": "BUG-001",
+      "error": "Admin accesses coach dashboard: HTTP expected 200, actual 404\n\n404 !== 200\n",
+      "durationMs": 493,
+      "requests": [
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/login",
+          "expected": null,
+          "status": 200,
+          "ms": 160
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/coach/dashboard",
+          "expected": 200,
+          "status": 404,
+          "ms": 178
+        },
+        {
+          "phase": "setup/cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "expected": null,
+          "status": 200,
+          "ms": 154
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-SECURITY-01",
+      "suite": "Security",
+      "title": "SQL injection trong email bị validation từ chối",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 152,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "expected": 422,
+          "status": 422,
+          "ms": 152
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-SECURITY-02",
+      "suite": "Security",
+      "title": "Password 7 ký tự bị từ chối",
+      "result": "Pass",
+      "knownDefect": null,
+      "error": null,
+      "durationMs": 192,
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/register",
+          "expected": 422,
+          "status": 422,
+          "ms": 192
+        }
+      ],
+      "cleanupErrors": []
+    }
+  ]
+}
