@@ -1,0 +1,159 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>SportCenter NFR</title><style>body{font:15px system-ui;margin:30px}table{border-collapse:collapse}td,th{border:1px solid #bbb;padding:8px}pre{white-space:pre-wrap}</style><h1>NFR: 14/17 Pass</h1><p>NFR Node HTTP integration | 2026-10-05T07:38:22.125Z</p><p>ReadyAPI Desktop: Not run. Targets proposed for this lab only.</p><pre>{
+  &quot;managed&quot;: true,
+  &quot;database&quot;: &quot;fresh isolated seeded SQLite&quot;,
+  &quot;server&quot;: &quot;PHP built-in single-worker development server&quot;,
+  &quot;php&quot;: &quot;8.2.12&quot;,
+  &quot;node&quot;: &quot;v24.12.0&quot;,
+  &quot;os&quot;: &quot;win32 10.0.26200&quot;,
+  &quot;cpu&quot;: &quot;AMD Ryzen 7 H 255 w/ Radeon 780M Graphics&quot;,
+  &quot;logicalCpus&quot;: 16,
+  &quot;memoryGB&quot;: 30.8,
+  &quot;bcryptRounds&quot;: 4
+}</pre><table><tr><th>ID</th><th>Result</th><th>Metric / observations</th><th>Error</th></tr><tr><td>TC-NFR-PERF-01</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;measured&quot;,
+      &quot;concurrency&quot;: 1,
+      &quot;requests&quot;: 30,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 117.39,
+      &quot;p95Ms&quot;: 149.25,
+      &quot;p99Ms&quot;: 151.57,
+      &quot;maxMs&quot;: 151.57,
+      &quot;elapsedMs&quot;: 3767,
+      &quot;throughputRps&quot;: 7.96
+    }
+  ]
+}</pre></td><td></td></tr><tr><td>TC-NFR-PERF-02</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;measured&quot;,
+      &quot;concurrency&quot;: 5,
+      &quot;requests&quot;: 50,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 793.62,
+      &quot;p95Ms&quot;: 805.94,
+      &quot;p99Ms&quot;: 810.14,
+      &quot;maxMs&quot;: 810.14,
+      &quot;elapsedMs&quot;: 7943,
+      &quot;throughputRps&quot;: 6.3
+    }
+  ]
+}</pre></td><td></td></tr><tr><td>TC-NFR-PERF-03</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;measured&quot;,
+      &quot;concurrency&quot;: 3,
+      &quot;requests&quot;: 60,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 464.81,
+      &quot;p95Ms&quot;: 485.38,
+      &quot;p99Ms&quot;: 490.2,
+      &quot;maxMs&quot;: 490.2,
+      &quot;elapsedMs&quot;: 9300,
+      &quot;throughputRps&quot;: 6.45
+    }
+  ]
+}</pre></td><td></td></tr><tr><td>TC-NFR-PERF-04</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;measured&quot;,
+      &quot;concurrency&quot;: 3,
+      &quot;requests&quot;: 30,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 419.41,
+      &quot;p95Ms&quot;: 429.91,
+      &quot;p99Ms&quot;: 430.43,
+      &quot;maxMs&quot;: 430.43,
+      &quot;elapsedMs&quot;: 4203,
+      &quot;throughputRps&quot;: 7.14
+    }
+  ]
+}</pre></td><td></td></tr><tr><td>TC-NFR-PERF-05</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;baseline&quot;,
+      &quot;concurrency&quot;: 1,
+      &quot;requests&quot;: 20,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 158.27,
+      &quot;p95Ms&quot;: 169.71,
+      &quot;p99Ms&quot;: 171.98,
+      &quot;maxMs&quot;: 171.98,
+      &quot;elapsedMs&quot;: 3215,
+      &quot;throughputRps&quot;: 6.22
+    },
+    {
+      &quot;phase&quot;: &quot;spike&quot;,
+      &quot;concurrency&quot;: 5,
+      &quot;requests&quot;: 40,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 793.78,
+      &quot;p95Ms&quot;: 804.72,
+      &quot;p99Ms&quot;: 805.89,
+      &quot;maxMs&quot;: 805.89,
+      &quot;elapsedMs&quot;: 6366,
+      &quot;throughputRps&quot;: 6.28
+    },
+    {
+      &quot;phase&quot;: &quot;recovery&quot;,
+      &quot;concurrency&quot;: 1,
+      &quot;requests&quot;: 20,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 157.48,
+      &quot;p95Ms&quot;: 166.21,
+      &quot;p99Ms&quot;: 168.13,
+      &quot;maxMs&quot;: 168.13,
+      &quot;elapsedMs&quot;: 3174,
+      &quot;throughputRps&quot;: 6.3
+    }
+  ],
+  &quot;recoveryLimitMs&quot;: 509.13
+}</pre></td><td></td></tr><tr><td>TC-NFR-PERF-06</td><td>Pass</td><td><pre>{
+  &quot;percentileMethod&quot;: &quot;nearest-rank&quot;,
+  &quot;phases&quot;: [
+    {
+      &quot;phase&quot;: &quot;measured&quot;,
+      &quot;concurrency&quot;: 1,
+      &quot;requests&quot;: 79,
+      &quot;errors&quot;: 0,
+      &quot;errorRate&quot;: 0,
+      &quot;p50Ms&quot;: 142.55,
+      &quot;p95Ms&quot;: 154.16,
+      &quot;p99Ms&quot;: 158.95,
+      &quot;maxMs&quot;: 158.95,
+      &quot;elapsedMs&quot;: 20033,
+      &quot;throughputRps&quot;: 3.94
+    }
+  ]
+}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-01</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-02</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-03</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-04</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-05</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-06</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-07</td><td>Fail</td><td><pre>{
+  &quot;attemptedStatus&quot;: 200,
+  &quot;foreignWritePersisted&quot;: true
+}</pre></td><td>BOLA: foreign coach write accepted or persisted; HTTP=200, persisted=true</td></tr><tr><td>TC-NFR-SEC-08</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-09</td><td>Pass</td><td><pre>{}</pre></td><td></td></tr><tr><td>TC-NFR-SEC-10</td><td>Fail</td><td><pre>{
+  &quot;unknownStatus&quot;: 401,
+  &quot;knownStatus&quot;: 401,
+  &quot;unknownMessage&quot;: &quot;Incorrect email or password.&quot;,
+  &quot;knownMessage&quot;: &quot;Incorrect password. 4 attempt(s) remaining.&quot;
+}</pre></td><td>PROPOSED policy: account enumeration via different error messages
++ actual - expected
+
++ 'Incorrect email or password.'
+- 'Incorrect password. 4 attempt(s) remaining.'
+             ^
+</td></tr><tr><td>TC-NFR-SEC-11</td><td>Fail</td><td><pre>{
+  &quot;attempts&quot;: 25,
+  &quot;throttled&quot;: false,
+  &quot;retryAfter&quot;: null
+}</pre></td><td>PROPOSED lab anti-abuse policy: no 429 in bounded 25-request login burst</td></tr></table><h2>Limitations</h2><ul><li>Only localhost and nfrLabOnly=true are accepted. Maximum 5 workers, 100 requests per batch, 5s per request; no external stress/DoS scans.</li><li>PHP built-in development server is normally single-worker. Client concurrency is not proof of concurrent application processing; SQLite and seed dataset are small.</li><li>Client-observed latency includes full response body; excludes login/setup, warmup and cleanup. Report nearest-rank p50/p95/p99, max, throughput and error rate.</li><li>Performance targets and enumeration/throttle policies are proposed LAB requirements, not contractual production SLAs.</li><li>This is bounded performance testing and targeted API security regression, not a complete pentest, certification, production capacity benchmark or long endurance test. Object-write probe creates a new QA session on an existing seeded planning; QA sessions remain in the disposable lab DB.</li><li>HTTP localhost cannot validate TLS/HSTS. CORS, CSRF browser behavior, frontend XSS rendering, large production datasets, native ReadyAPI Load/Security Test UI and CPU/memory metrics remain untested.</li></ul></html>

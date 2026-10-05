@@ -1,0 +1,1784 @@
+[
+    {
+        "id": "TC-AUTH-01",
+        "suite": "Authentication",
+        "title": "\u0110\u0103ng nh\u1eadp admin v\u1edbi credential seed",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 404,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 200,
+                "status": 200,
+                "ms": 164
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-02",
+        "suite": "Authentication",
+        "title": "Email kh\u00f4ng t\u1ed3n t\u1ea1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 127,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 122
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-03",
+        "suite": "Authentication",
+        "title": "Sai password m\u1ed9t l\u1ea7n, c\u00f2n 4 l\u1ea7n th\u1eed",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1111,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 137
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 119
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 134
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 174
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 119
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/11",
+                "expected": null,
+                "status": 200,
+                "ms": 119
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 146
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 147
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-04",
+        "suite": "Authentication",
+        "title": "Kh\u00f3a sau 5 l\u1ea7n sai; l\u1ea7n 6 tr\u1ea3 423",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 2156,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 193
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 150
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 159
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 215
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 166
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 158
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 161
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 152
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 401,
+                "status": 401,
+                "ms": 157
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 423,
+                "status": 423,
+                "ms": 144
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/12",
+                "expected": null,
+                "status": 200,
+                "ms": 168
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 158
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 153
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-05",
+        "suite": "Authentication",
+        "title": "Login thi\u1ebfu email",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 160,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 422,
+                "status": 422,
+                "ms": 153
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-06",
+        "suite": "Authentication",
+        "title": "\u0110\u0103ng k\u00fd mensuel/card, t\u1ea1o client v\u00e0 k\u1ef3 \u0111\u1ea7u \u0111\u00e3 thanh to\u00e1n",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1342,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/register",
+                "expected": 201,
+                "status": 201,
+                "ms": 227
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 153
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/me",
+                "expected": 200,
+                "status": 200,
+                "ms": 154
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/client/paiements",
+                "expected": 200,
+                "status": 200,
+                "ms": 165
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 160
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/13",
+                "expected": null,
+                "status": 200,
+                "ms": 173
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 145
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 401,
+                "ms": 148
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-07",
+        "suite": "Authentication",
+        "title": "Register plan kh\u00f4ng h\u1ee3p l\u1ec7",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 157,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/register",
+                "expected": 422,
+                "status": 422,
+                "ms": 150
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-08",
+        "suite": "Authentication",
+        "title": "L\u1ea5y profile client v\u1edbi token h\u1ee3p l\u1ec7",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 502,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 185
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/me",
+                "expected": 200,
+                "status": 200,
+                "ms": 161
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 148
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-AUTH-09",
+        "suite": "Authentication",
+        "title": "Logout v\u00e0 ch\u1ee9ng minh token b\u1ecb thu h\u1ed3i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 662,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 200,
+                "status": 200,
+                "ms": 210
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/logout",
+                "expected": 200,
+                "status": 200,
+                "ms": 162
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/me",
+                "expected": 401,
+                "status": 401,
+                "ms": 135
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 401,
+                "ms": 147
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-01",
+        "suite": "Admin - Client",
+        "title": "Danh s\u00e1ch client ph\u00e2n trang 10",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 511,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 175
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients",
+                "expected": 200,
+                "status": 200,
+                "ms": 170
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 155
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-02",
+        "suite": "Admin - Client",
+        "title": "Search t\u00ecm \u0111\u00fang client QA theo email",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1340,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 177
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 152
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 163
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 203
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients?search=qa-463d4145-7b49-41d9-936a-607747a5b91c@test.local",
+                "expected": 200,
+                "status": 200,
+                "ms": 160
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/14",
+                "expected": null,
+                "status": 200,
+                "ms": 155
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 155
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 159
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-03",
+        "suite": "Admin - Client",
+        "title": "T\u1ea1o client v\u00e0 x\u00e1c minh l\u01b0u d\u1eef li\u1ec7u",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1352,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 171
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 162
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 154
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": 201,
+                "status": 201,
+                "ms": 208
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients/15",
+                "expected": 200,
+                "status": 200,
+                "ms": 181
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/15",
+                "expected": null,
+                "status": 200,
+                "ms": 153
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 161
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 147
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-04",
+        "suite": "Admin - Client",
+        "title": "T\u1ea1o client v\u1edbi coach kh\u00f4ng t\u1ed3n t\u1ea1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 605,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 211
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": 422,
+                "status": 422,
+                "ms": 207
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 179
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-05",
+        "suite": "Admin - Client",
+        "title": "Update statut suspendu v\u00e0 \u0111\u1ecdc l\u1ea1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1857,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 156
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 196
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 203
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 267
+            },
+            {
+                "phase": "test",
+                "method": "PUT",
+                "path": "/admin/clients/16",
+                "expected": 200,
+                "status": 200,
+                "ms": 229
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients/16",
+                "expected": 200,
+                "status": 200,
+                "ms": 174
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/16",
+                "expected": null,
+                "status": 200,
+                "ms": 214
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 192
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 210
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-CLIENT-06",
+        "suite": "Admin - Client",
+        "title": "Soft-delete client v\u00e0 user; endpoint/token kh\u00f4ng d\u00f9ng \u0111\u01b0\u1ee3c",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 2127,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 207
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 209
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 204
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 220
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 200,
+                "status": 200,
+                "ms": 174
+            },
+            {
+                "phase": "test",
+                "method": "DELETE",
+                "path": "/admin/clients/17",
+                "expected": 200,
+                "status": 200,
+                "ms": 168
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients/17",
+                "expected": 404,
+                "status": 404,
+                "ms": 145
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/me",
+                "expected": 401,
+                "status": 401,
+                "ms": 140
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/17",
+                "expected": null,
+                "status": 404,
+                "ms": 144
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 178
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 159
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 401,
+                "ms": 160
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-COACH-01",
+        "suite": "Admin - Coach",
+        "title": "List coach c\u00f3 code v\u00e0 clients_count",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 541,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 209
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/coaches",
+                "expected": 200,
+                "status": 200,
+                "ms": 155
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 166
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-COACH-02",
+        "suite": "Admin - Coach",
+        "title": "T\u1ea1o coach t\u1ef1 sinh COACH-NNN",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 704,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 188
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/coaches",
+                "expected": 201,
+                "status": 201,
+                "ms": 182
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/coaches/4",
+                "expected": null,
+                "status": 200,
+                "ms": 164
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 160
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-COACH-03",
+        "suite": "Admin - Coach",
+        "title": "Email coach tr\u00f9ng b\u1ecb t\u1eeb ch\u1ed1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 514,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 170
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/coaches",
+                "expected": 422,
+                "status": 422,
+                "ms": 171
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 166
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ADMIN-COACH-04",
+        "suite": "Admin - Coach",
+        "title": "Kh\u00f4ng x\u00f3a coach c\u00f2n client",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1334,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 158
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 185
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 153
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 210
+            },
+            {
+                "phase": "test",
+                "method": "DELETE",
+                "path": "/admin/coaches/1",
+                "expected": 422,
+                "status": 422,
+                "ms": 156
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/18",
+                "expected": null,
+                "status": 200,
+                "ms": 149
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 161
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 152
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-PAIEMENT-01",
+        "suite": "Payment",
+        "title": "L\u1ecdc k\u1ef3 h\u1ea1n en_attente \u0111\u00e3 qu\u00e1 h\u1ea1n",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 509,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 167
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/paiements?statut=retard",
+                "expected": 200,
+                "status": 200,
+                "ms": 182
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 145
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-PAIEMENT-02",
+        "suite": "Payment",
+        "title": "T\u1ea1o payment v\u00e0 c\u1eadp nh\u1eadt echeance th\u00e0nh paye",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1828,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 177
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 191
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 186
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 220
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/admin/clients/19",
+                "expected": null,
+                "status": 200,
+                "ms": 191
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/paiements",
+                "expected": 201,
+                "status": 201,
+                "ms": 190
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients/19",
+                "expected": 200,
+                "status": 200,
+                "ms": 164
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/19",
+                "expected": null,
+                "status": 200,
+                "ms": 155
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 184
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 155
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-PAIEMENT-03",
+        "suite": "Payment",
+        "title": "T\u1eeb ch\u1ed1i payment l\u1ea7n 2 c\u00f9ng k\u1ef3 h\u1ea1n",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1724,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 219
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 166
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 163
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 202
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/admin/clients/20",
+                "expected": null,
+                "status": 200,
+                "ms": 172
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/paiements",
+                "expected": null,
+                "status": 201,
+                "ms": 167
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/admin/paiements",
+                "expected": 422,
+                "status": 422,
+                "ms": 147
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/20",
+                "expected": null,
+                "status": 200,
+                "ms": 156
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 160
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 156
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-PAIEMENT-04",
+        "suite": "Payment",
+        "title": "Stats c\u00f3 4 field v\u00e0 s\u1ed1 ti\u1ec1n kh\u00f4ng \u00e2m",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 474,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 170
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/paiements/stats",
+                "expected": 200,
+                "status": 200,
+                "ms": 149
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 148
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-COACH-01",
+        "suite": "Coach - Planning",
+        "title": "Coach xem planning th\u00e1ng/n\u0103m hi\u1ec7n t\u1ea1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 748,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 158
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 195
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/coach/planning?mois=10&annee=2026",
+                "expected": 200,
+                "status": 200,
+                "ms": 209
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 175
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-COACH-02",
+        "suite": "Coach - Planning",
+        "title": "T\u1ea1o session cho client coach kh\u00e1c b\u1ecb 404",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 2219,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 220
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 211
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 177
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 202
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 193
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 250
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/coach/planning/seances",
+                "expected": 404,
+                "status": 404,
+                "ms": 216
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/21",
+                "expected": null,
+                "status": 200,
+                "ms": 172
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 183
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 174
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 203
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-COACH-03",
+        "suite": "Coach - Planning",
+        "title": "Gi\u1edd k\u1ebft th\u00fac tr\u01b0\u1edbc gi\u1edd b\u1eaft \u0111\u1ea7u b\u1ecb 422",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 1539,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 213
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "GET",
+                "path": "/me",
+                "expected": null,
+                "status": 200,
+                "ms": 205
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 186
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/admin/clients",
+                "expected": null,
+                "status": 201,
+                "ms": 219
+            },
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/coach/planning/seances",
+                "expected": 422,
+                "status": 422,
+                "ms": 178
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "DELETE",
+                "path": "/admin/clients/22",
+                "expected": null,
+                "status": 200,
+                "ms": 156
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 173
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 197
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-CLIENT-01",
+        "suite": "Client",
+        "title": "Client dashboard c\u1ee7a ch\u00ednh account",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 609,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 220
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/client/dashboard",
+                "expected": 200,
+                "status": 200,
+                "ms": 198
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 182
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-CLIENT-02",
+        "suite": "Client",
+        "title": "Client payments tr\u1ea3 object k\u1ef3 h\u1ea1n v\u00e0 t\u1ed5ng ti\u1ec1n",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 625,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 220
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/client/paiements",
+                "expected": 200,
+                "status": 200,
+                "ms": 188
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 208
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ROLE-01",
+        "suite": "Role",
+        "title": "Client g\u1ecdi admin b\u1ecb 403",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 606,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 210
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients",
+                "expected": 403,
+                "status": 403,
+                "ms": 195
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 193
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ROLE-02",
+        "suite": "Role",
+        "title": "Kh\u00f4ng token g\u1ecdi admin b\u1ecb 401",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 206,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/admin/clients",
+                "expected": 401,
+                "status": 401,
+                "ms": 201
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-ROLE-03",
+        "suite": "Role",
+        "title": "Admin \u0111\u01b0\u1ee3c middleware cho ph\u00e9p xem coach dashboard",
+        "result": "Fail",
+        "knownDefect": "BUG-001",
+        "error": "Admin accesses coach dashboard: HTTP expected 200, actual 404. Expression: (r.status == step.status)",
+        "durationMs": 565,
+        "requests": [
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/login",
+                "expected": null,
+                "status": 200,
+                "ms": 193
+            },
+            {
+                "phase": "test",
+                "method": "GET",
+                "path": "/coach/dashboard",
+                "expected": 200,
+                "status": 404,
+                "ms": 206
+            },
+            {
+                "phase": "setup/cleanup",
+                "method": "POST",
+                "path": "/logout",
+                "expected": null,
+                "status": 200,
+                "ms": 157
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-SECURITY-01",
+        "suite": "Security",
+        "title": "SQL injection trong email b\u1ecb validation t\u1eeb ch\u1ed1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 199,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/login",
+                "expected": 422,
+                "status": 422,
+                "ms": 194
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    },
+    {
+        "id": "TC-SECURITY-02",
+        "suite": "Security",
+        "title": "Password 7 k\u00fd t\u1ef1 b\u1ecb t\u1eeb ch\u1ed1i",
+        "result": "Pass",
+        "knownDefect": null,
+        "error": null,
+        "durationMs": 215,
+        "requests": [
+            {
+                "phase": "test",
+                "method": "POST",
+                "path": "/register",
+                "expected": 422,
+                "status": 422,
+                "ms": 210
+            }
+        ],
+        "cleanupErrors": [
+            
+        ]
+    }
+]

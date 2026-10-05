@@ -13,8 +13,8 @@ $ns=[Xml.XmlNamespaceManager]::new($project.NameTable)
 $ns.AddNamespace('c','http://eviware.com/soapui/config')
 $cases=$project.SelectNodes('//c:testCase',$ns)
 $steps=$project.SelectNodes('//c:testStep',$ns)
-if($cases.Count -ne 33 -or $steps.Count -ne 33) { throw 'Expected 33 cases / 33 Groovy steps' }
-$ids=@($cases | ForEach-Object { $_.GetAttribute('name').Split(' ')[0] })
+if($cases.Count -ne 50 -or $steps.Count -ne 50) { throw 'Expected 50 cases / 50 Groovy steps' }
+$ids=@($cases | ForEach-Object { $_.GetAttribute('name').Split(' ')[0] } | Where-Object {$_ -notlike 'TC-NFR-*'})
 if(($ids | Select-Object -Unique).Count -ne 33) { throw 'Duplicate testcase IDs' }
 $schema=Join-Path $Directory 'soapui.xsd'
 if(Test-Path -LiteralPath $schema) {
@@ -60,4 +60,4 @@ if(Test-Path -LiteralPath $research) {
         if(-not $document.OuterXml.Contains('BUG-001')) {throw 'Missing research appendix'}
     } finally {$archive.Dispose()}
 }
-Write-Output 'PASS: 33 matching IDs; 48 requests; Excel/Word XML valid; SoapUI schema valid; 32 Pass/1 Fail in both runners; GUI Not run.'
+Write-Output 'PASS: 50 XML cases including 33 matching functional IDs; original 48 functional requests; Excel/Word XML valid; SoapUI schema valid; saved functional 32 Pass/1 Fail; GUI Not run. Run nfr/verify-nfr-artifacts.ps1 for NFR evidence.'

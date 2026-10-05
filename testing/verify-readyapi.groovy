@@ -29,6 +29,8 @@ def results = []
 def logger = new Expando(info: { Object message -> /* response logging suppressed in verifier output */ })
 for (int i = 0; i < cases.length; i++) {
     def tc = cases.item(i)
+    // Preserve the original functional runner: NFR scripts use their own safety/configuration harness.
+    if (tc.getAttribute('name').startsWith('TC-NFR-')) continue
     def script = tc.getElementsByTagName('script').item(0).textContent
     def project = new Expando(getPropertyValue: { String name -> properties[name] })
     def runner = new Expando(testCase: new Expando(testSuite: new Expando(project: project)))

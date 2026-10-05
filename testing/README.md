@@ -1,13 +1,15 @@
-# SportCenter — 33 test cases ReadyAPI
+# SportCenter — 50 test cases ReadyAPI
+
+> Cập nhật 05/10/2026: giữ nguyên **33 functional cases**, bổ sung **17 NFR cases** (6 performance + 11 security). Project XML tổng hiện có **50 cases / 10 suites**. Xem [nfr/README.md](nfr/README.md) để chạy bộ mới; Excel có 4 sheet `NFR ...`. Các kết quả 32 Pass/1 Fail dưới đây chỉ nói về bộ functional cũ, không bao gồm NFR.
 
 Bộ test áp dụng cho https://github.com/ThachTheStone/SportCenter.Testing, commit a0648e3.
 
-33 case / 8 suites giữ nguyên TC ID của VIPSportCenter_ReadyAPI_TestPlan.xlsx. Source thống nhất trong cases.mjs; generator tạo Excel và project ReadyAPI từ source này.
+33 functional case / 8 functional suites giữ nguyên TC ID của VIPSportCenter_ReadyAPI_TestPlan.xlsx; tổng project hiện có 50 case / 10 suites sau khi thêm NFR. Source functional thống nhất trong cases.mjs; source NFR ở nfr/nfr-cases.mjs.
 
 ## File chính
 
 - ../VIPSportCenter_ReadyAPI_TestCases_Corrected.xlsx: Overview, Test Cases, Request Steps, Changes, Results, Defects.
-- VIPSportCenter-readyapi-project.xml: import ReadyAPI/SoapUI, gồm 33 Groovy Script TestSteps.
+- VIPSportCenter-readyapi-project.xml: import ReadyAPI/SoapUI, gồm 50 Groovy Script TestSteps (33 functional + 17 NFR).
 - groovy/*.groovy: source riêng của từng case.
 - readyapi-engine.groovy: implementation dùng chung, tự login, setup, HTTP, assert và cleanup.
 - cases.mjs: dữ liệu và kịch bản đầy đủ.
@@ -71,8 +73,8 @@ Giữ terminal mở. Copy URL này vào Project Properties > baseUrl trong Ready
 Các bước:
 1. File > Import Project, chọn VIPSportCenter-readyapi-project.xml.
 2. Project Properties: đặt baseUrl theo terminal; giữ credential seed mặc định.
-3. Mở Functional Tests; thấy 8 suites, 33 cases.
-4. Chạy tuần tự toàn project/suite hoặc từng case.
+3. Mở Functional Tests; thấy 10 suites, 50 cases. Trong đó 8 suite cũ/33 functional, 2 suite `NFR - ...`/17 nonfunctional.
+4. Chạy tuần tự các suite functional hoặc từng case. Với NFR, xem nfr/README.md, đặt project property nfrLabOnly=true sau khi xác nhận database lab riêng. Mặc định false để chặn chạy NFR ngoài ý muốn.
 5. Mở Groovy step để xem log method/path/status/ms và kết quả assert.
 6. TC-ROLE-03 hiện sẽ Fail; ghi BUG-001 trong báo cáo.
 7. Cập nhật cột ReadyAPI GUI trong Excel bằng kết quả GUI thực tế.

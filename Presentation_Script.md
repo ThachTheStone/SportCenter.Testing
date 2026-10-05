@@ -2,6 +2,8 @@
 
 Ngày soạn: 04/10/2026. Môn: SWT301 — LAB2. Project: SportCenter.Testing, commit a0648e3.
 
+> Cập nhật 05/10/2026: đã thêm 17 NFR case (6 performance, 11 security), tổng 50 case. Script 25 phút bên dưới vẫn lấy 33 functional case làm demo chính; xem mục 12 để thay một phần demo bằng NFR, không cộng thêm thời gian ngoài khung. Kết quả functional 32/1 và NFR được ghi riêng, GUI vẫn cần chạy rehearsal.
+
 File này là tài liệu tập nói và chuẩn bị demo. Khi làm slide, chỉ lấy phần **Nội dung chiếu**; phần **Lời nói**, thao tác và câu trả lời dùng để luyện trước. Ngày trình bày không cầm hoặc đọc file này.
 
 ## 1. Mục tiêu, phạm vi và quy tắc
@@ -530,3 +532,40 @@ Evidence của bài lab:
 - [Evaluation](Evaluation.md).
 
 Số liệu evidence đã kiểm tra lúc soạn: HTTP timestamp 2026-10-03T19:41:32.154Z; Groovy timestamp 2026-10-03T19:55:46.645Z. Cả hai là ngày 04/10/2026 theo giờ Việt Nam/Thái Lan (UTC+7). ReadyAPI GUI chưa có kết quả được ghi nhận.
+
+## 12. Bổ sung Nonfunctional — 05/10/2026
+
+Phần tính năng/chưa thực hiện ở slide 7 nói về demo functional ban đầu. Nay đã có bounded performance và targeted security regression bằng script, nhưng **chưa có kết quả ReadyAPI Desktop/native Performance/Security Test UI**. Cập nhật lời nói khi chọn demo NFR; không nhận đây là full load benchmark/pentest.
+
+**Nội dung chiếu bổ sung (thay slide 9 hoặc 10, không tăng số slide):**
+
+- 33 Functional + 6 Performance + 11 Security
+- p95 • throughput • error rate
+- Ownership write: kiểm tra cả state
+- Lab targets ≠ production SLA
+
+**Lời nói 45–60 giây:** “Nhóm bổ sung baseline, tải đồng thời nhỏ, mixed roles, spike/recovery và short soak. Các chỉ số là latency p50/p95/p99, throughput và lỗi. Đây là mục tiêu đề xuất cho máy lab, không chứng minh năng lực production vì dùng PHP dev server/SQLite. Security test không chỉ kiểm tra HTTP: test coach sửa session coach khác đọc lại dữ liệu để biết thay đổi có lưu hay không. Bộ mới cũng kiểm tra token, role injection, secret leak, enumeration và rate limiting.”
+
+**Lựa chọn demo NFR trong cùng khung 15 phút:**
+
+| Khoảng giờ buổi | Who | How | What cần chứng minh |
+|---|---|---|---|
+| 10:00–14:30 | TV1 | Giữ kịch bản1 register/token/role | Positive + access denied |
+| 14:30–20:00 | TV2 | Giữ kịch bản2 payment/duplicate | Business correctness |
+| 20:00–21:15 | TV3 | NFR Performance → PERF-01; chỉ metrics log | Warmup excluded; p95<=500ms; HTTP200 + payload; lab only |
+| 21:15–23:15 | TV3 | NFR Security → SEC-07; xem observations và source marquerRealisee | Foreign write expected403/404; actual200, persisted=true; Fail có ý nghĩa |
+| 23:15–24:00 | TV1 | SEC-10 hoặc chỉ Findings đã lưu, phân biệt report với live | Message phân biệt email; policy đề xuất |
+| 24:00–25:00 | TV2/TV3 | Chốt limitation + contribution + Q&A | Không cộng full suite 50 vào cuối khi không đủ thời gian |
+
+Không thay test bằng video. Nếu dùng report đã lưu, nói rõ “kết quả đã chạy” và vẫn thực thi ít nhất hai scenario live. Native ReadyAPI load/security UI nếu muốn thêm phải tập riêng với license/bản cài; mã hiện tại là Groovy Script step trong Functional Tests.
+
+**Pre-demo:** bật managed API như mục5, import XML50 hoặc NFR-only17, đặt baseUrl động và `nfrLabOnly=true` sau khi xác nhận DB riêng. Đóng Node performance run khác để không gây nhiễu. Chạy PERF-01 và SEC-07 trước ngày trình bày để đo thời gian thực tế; không đổi threshold/expected cho xanh.
+
+**Câu hỏi NFR cần thuộc:**
+
+- “p95 là gì?” → Giá trị nearest-rank mà khoảng95% mẫu không vượt qua; báo cả max/errors, không chỉ average.
+- “5 worker là backend5 luồng?” → Không. Đó là concurrency từ client; PHP dev server có thể xếp hàng single-worker.
+- “Vì sao rate-limit test Fail?” → Có25 login sai cho email không tồn tại mà chưa429; đây là policy LAB đề xuất, còn cần team xác nhận.
+- “Security scan đầy đủ chưa?” → Chưa. Đây là11 targeted probes; TLS/browser/large load/full OWASP/native GUI còn ngoài phạm vi.
+
+File: [NFR README](testing/nfr/README.md), [NFR Findings](testing/nfr/NFR_Findings.md), [NFR case definitions](testing/nfr/nfr-cases.mjs), [NFR Node results](testing/nfr/reports/results.json), [NFR Groovy results](testing/nfr/reports-groovy/results.json).

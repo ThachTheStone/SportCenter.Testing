@@ -1,0 +1,4078 @@
+{
+  "timestamp": "2026-10-05T07:38:22.125Z",
+  "mode": "NFR Node HTTP integration",
+  "readyApiGui": "Not run",
+  "commit": "1d5a81e",
+  "workingTreeModified": false,
+  "testSourceSha256": {
+    "nfr-cases.mjs": "1a5fcf32e48d06a70cdbea093f92ca9da0117ecfa5a9515288087a33ff045dbd",
+    "nfr-engine.mjs": "c4442e859a9a8c9084842ebb5bc8c551eeaec1dd35f41f2b70189b2550d2b2ca",
+    "nfr-engine.groovy": "08ad0945d5f2bd94f8d4af55e258508a2674832732c2a3db8d6c4d6747d687c7",
+    "VIPSportCenter-nfr-readyapi-project.xml": "232bf873ef665d584760e995e680141550ff12e3bd2d80973140918858fd52fa"
+  },
+  "baseUrl": "http://127.0.0.1:53956/api",
+  "environment": {
+    "managed": true,
+    "database": "fresh isolated seeded SQLite",
+    "server": "PHP built-in single-worker development server",
+    "php": "8.2.12",
+    "node": "v24.12.0",
+    "os": "win32 10.0.26200",
+    "cpu": "AMD Ryzen 7 H 255 w/ Radeon 780M Graphics",
+    "logicalCpus": 16,
+    "memoryGB": 30.8,
+    "bcryptRounds": 4
+  },
+  "limitations": [
+    "Only localhost and nfrLabOnly=true are accepted. Maximum 5 workers, 100 requests per batch, 5s per request; no external stress/DoS scans.",
+    "PHP built-in development server is normally single-worker. Client concurrency is not proof of concurrent application processing; SQLite and seed dataset are small.",
+    "Client-observed latency includes full response body; excludes login/setup, warmup and cleanup. Report nearest-rank p50/p95/p99, max, throughput and error rate.",
+    "Performance targets and enumeration/throttle policies are proposed LAB requirements, not contractual production SLAs.",
+    "This is bounded performance testing and targeted API security regression, not a complete pentest, certification, production capacity benchmark or long endurance test. Object-write probe creates a new QA session on an existing seeded planning; QA sessions remain in the disposable lab DB.",
+    "HTTP localhost cannot validate TLS/HSTS. CORS, CSRF browser behavior, frontend XSS rendering, large production datasets, native ReadyAPI Load/Security Test UI and CPU/memory metrics remain untested."
+  ],
+  "summary": {
+    "total": 17,
+    "pass": 14,
+    "fail": 3,
+    "blocked": 0
+  },
+  "cases": [
+    {
+      "id": "TC-NFR-PERF-01",
+      "title": "Baseline /me: latency distribution",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 4640,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "measured",
+            "concurrency": 1,
+            "requests": 30,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 117.39,
+            "p95Ms": 149.25,
+            "p99Ms": 151.57,
+            "maxMs": 151.57,
+            "elapsedMs": 3767,
+            "throughputRps": 7.96
+          }
+        ]
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 140.97
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 126.41
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 114.44
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 111.76
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 116
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 114.41
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 124.6,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 111.44,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 113.65,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 116.11,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 107.08,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 110.28,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 107.18,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 112.64,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 111.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 120.36,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 112.95,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 111.69,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 117.39,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 113.44,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 111.53,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 107.48,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 108.52,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 124.64,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 149.25,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.33,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.4,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.13,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.66,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.49,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 151.57,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.34,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.48,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.37,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 148.47
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-PERF-02",
+      "title": "Small concurrent load: admin client list",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 9036,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "measured",
+            "concurrency": 5,
+            "requests": 50,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 793.62,
+            "p95Ms": 805.94,
+            "p99Ms": 810.14,
+            "maxMs": 810.14,
+            "elapsedMs": 7943,
+            "throughputRps": 6.3
+          }
+        ]
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 154.17
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 167.78
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 154.54
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.99
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.48
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.53
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 320.89,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 478.36,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 634.01,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.5,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 796.84,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 786.14,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 792.76,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 788.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 783.78,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 784.54,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 781.21,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.11,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 801.92,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 807.65,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 810.14,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 805.32,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 797.7,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 787.01,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 790.5,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.62,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.68,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 789.76,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 787.67,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 781.52,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 787.32,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 790.78,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.72,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 797.04,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.02,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 789.51,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.13,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 797.53,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 796.47,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.22,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 800.77,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 797.55,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 794.46,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 805.94,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 802.41,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 801.83,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 801.77,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 798.1,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 784.04,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.38,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 798.77,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.88,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 797.96,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.28,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 146.36
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-PERF-03",
+      "title": "Mixed roles, read-only workload",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 10981,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "measured",
+            "concurrency": 3,
+            "requests": 60,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 464.81,
+            "p95Ms": 485.38,
+            "p99Ms": 490.2,
+            "maxMs": 490.2,
+            "elapsedMs": 9300,
+            "throughputRps": 6.45
+          }
+        ]
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 150.16
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 157.91
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 151.25
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 161.62
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 152.29
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 155.91
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.99
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 156.2
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 163.49,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 305.6,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 459.86,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 465.36,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 474.26,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 483.19,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 475.52,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 477.53,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 453.81,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 450.74,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 455.28,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 468.15,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 483.15,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 482.67,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 486.12,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 472.15,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 476.16,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 466.9,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 481.33,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 471.61,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 487.67,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 472.57,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 473.54,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 462.38,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 470.64,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 473.02,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 481.95,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 474.27,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 459.08,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 441.98,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 442.47,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 458.77,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 467.13,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 471.61,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 456.66,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 447.22,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 439.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 455.44,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 464.81,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 470.57,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 458.52,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 448.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 443.12,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 439.81,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 452.98,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 458.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 466.46,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 453.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 449.98,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 446.54,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 451.44,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 476.02,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 481.35,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 485.38,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 460.41,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 454.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 445.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 453.17,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/coach/clients",
+          "status": 200,
+          "ms": 482.08,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/client/paiements",
+          "status": 200,
+          "ms": 490.2,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 146.17
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 144.06
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 146.7
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-PERF-04",
+      "title": "Payment stats aggregation at small load",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 5218,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "measured",
+            "concurrency": 3,
+            "requests": 30,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 419.41,
+            "p95Ms": 429.91,
+            "p99Ms": 430.43,
+            "maxMs": 430.43,
+            "elapsedMs": 4203,
+            "throughputRps": 7.14
+          }
+        ]
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 153.56
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 149.38
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 138.21
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 141.79
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 139.59
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 138.62
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 145.65,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 281.75,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 429.91,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 422.31,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 425.54,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 413.19,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 412.75,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 411.14,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 413.36,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 423.59,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 421.23,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 422.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 413,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 415.46,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 419.41,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 422.4,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 430.43,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 424.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 424.16,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 415.5,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 412.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 410.95,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 413.06,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 429.66,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 429.75,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 427.42,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 415.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 418.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 420.26,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/admin/paiements/stats",
+          "status": 200,
+          "ms": 420.09,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 154.12
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-PERF-05",
+      "title": "Bounded spike and recovery",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 13865,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "baseline",
+            "concurrency": 1,
+            "requests": 20,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 158.27,
+            "p95Ms": 169.71,
+            "p99Ms": 171.98,
+            "maxMs": 171.98,
+            "elapsedMs": 3215,
+            "throughputRps": 6.22
+          },
+          {
+            "phase": "spike",
+            "concurrency": 5,
+            "requests": 40,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 793.78,
+            "p95Ms": 804.72,
+            "p99Ms": 805.89,
+            "maxMs": 805.89,
+            "elapsedMs": 6366,
+            "throughputRps": 6.28
+          },
+          {
+            "phase": "recovery",
+            "concurrency": 1,
+            "requests": 20,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 157.48,
+            "p95Ms": 166.21,
+            "p99Ms": 168.13,
+            "maxMs": 168.13,
+            "elapsedMs": 3174,
+            "throughputRps": 6.3
+          }
+        ],
+        "recoveryLimitMs": 509.13
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 154.74
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 169.57
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.98
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158.65
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 162.84
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 169.71,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.84,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 155.77,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 159.21,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.04,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.82,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 166.98,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 171.98,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158.79,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 155.34,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 159.25,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.75,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 168.83,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 166.84,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.49,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 155.1,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 159.9,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.42,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 166,
+          "valid": true
+        },
+        {
+          "phase": "baseline",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158.27,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 160.38,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 318.23,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 479.91,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 636.42,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 802.14,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 802.74,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 799.23,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 794.67,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 794.17,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 786.1,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 782.43,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 792.43,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.57,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 790.96,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 787.84,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 789.68,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 782.21,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 791.98,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 790.84,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 795.7,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.68,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 795.82,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 790.37,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 802.07,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 803.45,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 804.36,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 805.89,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 804.72,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.76,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.78,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 805.26,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 802.78,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 800.83,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 803.32,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 798.96,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 787.18,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 794.02,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 796.76,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 793.63,
+          "valid": true
+        },
+        {
+          "phase": "spike",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 796.96,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.78,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.52,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 165.34,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.88,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.03,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.58,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 160.67,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.48,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 168.13,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158.82,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 155.87,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.35,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.77,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.13,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 156.33,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 166.21,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 158.61,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 154.45,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 155.63,
+          "valid": true
+        },
+        {
+          "phase": "recovery",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 160.03,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 148.35
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-PERF-06",
+      "title": "Short soak: 20 seconds, bounded requests",
+      "suite": "NFR - Performance",
+      "category": "Performance",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 21055,
+      "metrics": {
+        "percentileMethod": "nearest-rank",
+        "phases": [
+          {
+            "phase": "measured",
+            "concurrency": 1,
+            "requests": 79,
+            "errors": 0,
+            "errorRate": 0,
+            "p50Ms": 142.55,
+            "p95Ms": 154.16,
+            "p99Ms": 158.95,
+            "maxMs": 158.95,
+            "elapsedMs": 20033,
+            "throughputRps": 3.94
+          }
+        ]
+      },
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 151.82
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 148
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.34
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.4
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.91
+        },
+        {
+          "phase": "warmup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.49
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.17,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 149.65,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 138.64,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 138.73,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.11,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 153.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.88,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.58,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.58,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.81,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 146.16,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.46,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 150.57,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.32,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.07,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.55,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 149.58,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.19,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.96,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 154.38,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.5,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 138.4,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 148.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.71,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.57,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 151.61,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.93,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.26,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.6,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 151.16,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.8,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.19,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.73,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 153.23,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.36,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.33,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.23,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 153.17,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.74,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.39,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 136.68,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 152.99,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.8,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.27,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.23,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 154.16,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 138.45,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.87,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.49,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 158.95,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 145.63,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.34,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.29,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 149.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.7,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 148.61,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 138.51,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 153.85,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.26,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 143.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 139.17,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 156.6,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.96,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.56,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 147.6,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 146.32,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.71,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.97,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 152.59,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 141.82,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 144.02,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 145.08,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 153.37,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.02,
+          "valid": true
+        },
+        {
+          "phase": "measured",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 140.34,
+          "valid": true
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 152.49
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-01",
+      "title": "Fabricated Bearer token must be rejected",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 143,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 401,
+          "ms": 142.98
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-02",
+      "title": "Altered token must be rejected",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 602,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 160.95
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 401,
+          "ms": 134.1
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 161.98
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 145.1
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-03",
+      "title": "Revoked token cannot be replayed",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 587,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 156.2
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 153.26
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 401,
+          "ms": 137.46
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 401,
+          "ms": 140.38
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-04",
+      "title": "Role matrix blocks privileged reads and writes",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 2035,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 157.89
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 154.5
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 156.85
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "status": 201,
+          "ms": 201.34
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 156.53
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 403,
+          "ms": 143.14
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 403,
+          "ms": 151.55
+        },
+        {
+          "phase": "test",
+          "method": "PUT",
+          "path": "/admin/clients/11",
+          "status": 403,
+          "ms": 140.27
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/11",
+          "status": 200,
+          "ms": 162.63
+        },
+        {
+          "phase": "cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/11",
+          "status": 200,
+          "ms": 151.85
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 151.5
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 156.2
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 150.7
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-05",
+      "title": "Registration role injection cannot grant admin",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 1051,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 153.68
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/register",
+          "status": 201,
+          "ms": 161.46
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 154.44
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 403,
+          "ms": 136.1
+        },
+        {
+          "phase": "cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/12",
+          "status": 200,
+          "ms": 162.89
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 145.02
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 401,
+          "ms": 137.56
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-06",
+      "title": "Coach cannot read another coach client assessment",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 1723,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 155.36
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 152.93
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 153.5
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "status": 201,
+          "ms": 197.86
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 159.59
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/coach/clients/13/bilans",
+          "status": 200,
+          "ms": 147.85
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/coach/clients/13/bilans",
+          "status": 403,
+          "ms": 157.58
+        },
+        {
+          "phase": "cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/13",
+          "status": 200,
+          "ms": 154.61
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 149.68
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 142.51
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 151.58
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-07",
+      "title": "Coach cannot mark another coach session completed",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Fail",
+      "error": "BOLA: foreign coach write accepted or persisted; HTTP=200, persisted=true",
+      "knownDefect": "NFR-BUG-001",
+      "durationMs": 1388,
+      "metrics": null,
+      "observations": {
+        "attemptedStatus": 200,
+        "foreignWritePersisted": true
+      },
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 157.28
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 150.13
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/coach/planning?mois=10&annee=2026",
+          "status": 200,
+          "ms": 157.66
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/coach/planning/seances",
+          "status": 201,
+          "ms": 154.9
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/coach/planning?mois=10&annee=2026",
+          "status": 200,
+          "ms": 152.64
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/coach/seances/51/realiser",
+          "status": 200,
+          "ms": 164.95
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/coach/planning?mois=10&annee=2026",
+          "status": 200,
+          "ms": 156.3
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 146.53
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 146.51
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-08",
+      "title": "No password/hash/remember_token disclosure in JSON",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 1571,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 152.48
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 148.24
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 153.13
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "status": 201,
+          "ms": 195.51
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 142.67
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients",
+          "status": 200,
+          "ms": 157.54
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/14",
+          "status": 200,
+          "ms": 154.01
+        },
+        {
+          "phase": "cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/14",
+          "status": 200,
+          "ms": 158.68
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 155.27
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 152.76
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-09",
+      "title": "Errors do not expose SQL, stack or source paths",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Pass",
+      "error": null,
+      "knownDefect": null,
+      "durationMs": 708,
+      "metrics": null,
+      "observations": {},
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 155.69
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 422,
+          "ms": 129.02
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/admin/clients/2147483647",
+          "status": 404,
+          "ms": 151.91
+        },
+        {
+          "phase": "test",
+          "method": "GET",
+          "path": "/nfr-route-not-found",
+          "status": 404,
+          "ms": 123.45
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 147.86
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-10",
+      "title": "Login does not reveal email existence",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Fail",
+      "error": "PROPOSED policy: account enumeration via different error messages\n+ actual - expected\n\n+ 'Incorrect email or password.'\n- 'Incorrect password. 4 attempt(s) remaining.'\n             ^\n",
+      "knownDefect": "NFR-BUG-002",
+      "durationMs": 1511,
+      "metrics": null,
+      "observations": {
+        "unknownStatus": 401,
+        "knownStatus": 401,
+        "unknownMessage": "Incorrect email or password.",
+        "knownMessage": "Incorrect password. 4 attempt(s) remaining."
+      },
+      "requests": [
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 152.62
+        },
+        {
+          "phase": "setup",
+          "method": "GET",
+          "path": "/me",
+          "status": 200,
+          "ms": 156.4
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/login",
+          "status": 200,
+          "ms": 158.75
+        },
+        {
+          "phase": "setup",
+          "method": "POST",
+          "path": "/admin/clients",
+          "status": 201,
+          "ms": 203.32
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 145.76
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 148.65
+        },
+        {
+          "phase": "cleanup",
+          "method": "DELETE",
+          "path": "/admin/clients/15",
+          "status": 200,
+          "ms": 193.52
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 191.19
+        },
+        {
+          "phase": "cleanup",
+          "method": "POST",
+          "path": "/logout",
+          "status": 200,
+          "ms": 159.75
+        }
+      ],
+      "cleanupErrors": []
+    },
+    {
+      "id": "TC-NFR-SEC-11",
+      "title": "Bounded login burst is throttled",
+      "suite": "NFR - Security",
+      "category": "Security",
+      "result": "Fail",
+      "error": "PROPOSED lab anti-abuse policy: no 429 in bounded 25-request login burst",
+      "knownDefect": "NFR-BUG-003",
+      "durationMs": 3695,
+      "metrics": null,
+      "observations": {
+        "attempts": 25,
+        "throttled": false,
+        "retryAfter": null
+      },
+      "requests": [
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 144.42
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 145.61
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 138.58
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 145.29
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 151.82
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 178.44
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 192.9
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 180.56
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 142.3
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 143.79
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 140.61
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 140.65
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 145.94
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 140.63
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 142.59
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 146.36
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 143.69
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 140.62
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 139.1
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 143.85
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 139.64
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 138.56
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 144.41
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 142.12
+        },
+        {
+          "phase": "test",
+          "method": "POST",
+          "path": "/login",
+          "status": 401,
+          "ms": 141.95
+        }
+      ],
+      "cleanupErrors": []
+    }
+  ]
+}

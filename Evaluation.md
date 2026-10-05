@@ -293,3 +293,32 @@ Nếu dùng Node dự phòng, ghi engine là Node ở một dòng riêng. Không
 
 Không tự điền điểm, tên, contribution Done hoặc câu trả lời thành công khi chưa có hoạt động thực tế.
 
+## 12. Bổ sung đánh giá Nonfunctional — 05/10/2026
+
+Project đã thêm17 NFR case (6 performance,11 security), tổng50; kết quả33 functional cũ phải ghi riêng. Số liệu NFR thực tế ở [NFR Findings](testing/nfr/NFR_Findings.md), [Node report](testing/nfr/reports/results.json), [Groovy report](testing/nfr/reports-groovy/results.json). Đây chưa phải kết quả Desktop GUI và chưa phải full OWASP/production capacity coverage.
+
+| Task bổ sung | Owner đề xuất | Evidence cần có | Actual / review |
+|---|---|---|---|
+| Hiểu profile/percentile và limitation single-worker | TV2 | Đọc code, explain p95/RPS/errors; chạy PERF-01/02 | [Điền sau khi thực hiện] |
+| Review ownership/session defect | TV3 | SEC-07 HTTP + persisted state; route/controller source | [Điền] |
+| Xác nhận policy enumeration/throttle đề xuất | TV1 + cả nhóm | Quyết định lecturer/product owner; giữ expected version | [Điền] |
+| Rehearsal ReadyAPI NFR | Cả nhóm | Version/license, localhost isolated DB, log/ảnh run thật | [Điền] |
+| Cập nhật Q&A và đánh giá chéo | Cả nhóm | Câu hỏi/đáp thực tế, không chép answer bank thành actual | [Điền] |
+
+**Tiêu chí đánh giá thêm, dùng trong rubric hiện có, không tự tăng tổng100:**
+
+- Requirement/target đo được và nói rõ target LAB đề xuất.
+- Chỉ số có sample count, p95/p99/max, throughput và lỗi; warmup/setup không trộn với load.
+- Không test production; có giới hạn tải, fixture riêng/token cleanup và scope security rõ.
+- Không coi API200 là security Pass nếu unauthorized write thực sự persisted.
+- Không đồng nhất Node/Groovy với ReadyAPI GUI hay “mọi API đều an toàn”.
+
+| Câu hỏi NFR dự kiến | Ý trả lời để tập | Người dự kiến |
+|---|---|---|
+| p95 khác average/max? | Quantile95%; report cả p99/max/errors, không che outlier | TV2 |
+| Vì sao không gọi short soak là endurance? | Chỉ20s hoặc80 request; không chạy nhiều giờ | TV2 |
+| Case SEC-07 chứng minh gì? | Coach khác gửi write, HTTP200 và đọc lại state có record; BOLA | TV3 |
+| Rate limiting có phải requirement gốc? | Chưa; policy đề xuất<=20/min, cần team phê duyệt | TV1 |
+| Chứng minh GUI đã chạy chưa? | Chỉ điền actual sau rehearsal Desktop; hiện Not run | Cả nhóm |
+
+Actual câu hỏi/đáp vẫn ghi ở bảng Q&A thực tế phía trên. Đóng góp sinh code/tài liệu có AI hỗ trợ phải khai báo đúng; không tự ghi mọi thành viên đã implement/run/review.
